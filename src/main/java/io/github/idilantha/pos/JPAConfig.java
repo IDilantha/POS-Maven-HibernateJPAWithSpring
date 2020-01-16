@@ -13,6 +13,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,7 +21,8 @@ import javax.sql.DataSource;
 
 
 @Configuration
-@PropertySource("")
+@EnableTransactionManagement
+@PropertySource("file:${user.dir}/src/main/resources/application.properties")
 public class JPAConfig {
 
     @Autowired
