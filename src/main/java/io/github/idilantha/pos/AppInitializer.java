@@ -47,7 +47,7 @@ public class AppInitializer extends Application {
 
         } catch (Exception e) {
             new Alert(Alert.AlertType.ERROR, "Something went wrong, please contact IT Team").show();
-            Logger.getLogger("lk.ijse.dep.pos").log(Level.SEVERE, null, e);
+            Logger.getLogger("io.github.idilantha.pos").log(Level.SEVERE, null, e);
         }
     }
 }
