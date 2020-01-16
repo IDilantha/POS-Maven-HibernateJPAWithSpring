@@ -6,10 +6,11 @@ import io.github.idilantha.pos.dao.custom.OrderDetailDAO;
 import io.github.idilantha.pos.entity.OrderDetail;
 import io.github.idilantha.pos.entity.OrderDetailPK;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.Query;
 
-@Component
+@Repository
 public class OrderDetailDAOImpl extends CrudDAOImpl<OrderDetail, OrderDetailPK> implements OrderDetailDAO {
 
     @Override
