@@ -9,6 +9,8 @@ import org.springframework.core.env.Environment;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.Database;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
 import javax.sql.DataSource;
 
@@ -29,6 +31,7 @@ public class JPAConfig {
         return lcemfb;
     }
 
+    @Bean
     public DataSource dataSource(){
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName(env.getRequiredProperty("javax.persistence.jdbc.driver"));
@@ -37,5 +40,18 @@ public class JPAConfig {
         ds.setUrl(env.getRequiredProperty("javax.persistence.jdbc.url"));
         return ds;
     }
+
+    @Bean
+    public JpaVendorAdapter jpaVendorAdapter(){
+        HibernateJpaVendorAdapter hjva = new HibernateJpaVendorAdapter();
+        hjva.setDatabase(Database.MYSQL);
+        hjva.setDatabasePlatform(env.getRequiredProperty("hibernate.dialect"));
+        hjva.setGenerateDdl(env.getRequiredProperty("hibernate.show_sql",Boolean.class));
+        hjva.setShowSql(env.getRequiredProperty("hibernate.hbm2ddl.auto").equals("update"));
+        return hjva;
+    }
+
+
+
 
 }
