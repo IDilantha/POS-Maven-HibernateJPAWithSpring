@@ -5,12 +5,14 @@ package io.github.idilantha.pos.dao;
 import io.github.idilantha.pos.entity.SuperEntity;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
 public abstract class CrudDAOImpl<T extends SuperEntity,Id extends Serializable> implements CrudDAO<T,Id> {
 
+    @PersistenceContext
     protected EntityManager entityManager;
     private Class<T> entity;
 
