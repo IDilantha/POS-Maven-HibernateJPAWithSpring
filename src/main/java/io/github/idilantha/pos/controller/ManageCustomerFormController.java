@@ -167,7 +167,12 @@ public class ManageCustomerFormController implements Initializable {
             CustomerTM selectedItem = tblCustomers.getSelectionModel().getSelectedItem();
             try {
                 customerBO.deleteCustomer(selectedItem.getId());
-                tblCustomers.getItems().remove(selectedItem);
+                tblCustomers.getItems().clear();
+                List<CustomerDTO> allCustomers = customerBO.findAllCustomers();
+                ObservableList<CustomerTM> customers = tblCustomers.getItems();
+                for (CustomerDTO c : allCustomers) {
+                    customers.add(new CustomerTM(c.getId(), c.getName(), c.getAddress()));
+                }
             }catch (AlreadyExistsInOrderException e){
                 new Alert(Alert.AlertType.INFORMATION,e.getMessage()).show();
             } catch (Exception e) {
