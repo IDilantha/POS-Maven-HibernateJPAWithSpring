@@ -44,9 +44,4 @@ public abstract class CrudDAOImpl<T extends SuperEntity,Id extends Serializable>
     public void delete(Id id) throws Exception {
         entityManager.remove(entityManager.getReference(entity,id));
     }
-
-    @Override
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
-    }
 }

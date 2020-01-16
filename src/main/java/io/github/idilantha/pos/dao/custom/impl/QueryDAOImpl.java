@@ -11,11 +11,13 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Repository
 public class QueryDAOImpl implements QueryDAO {
 
+    @PersistenceContext
     protected EntityManager entityManager;
 
     @Override
@@ -24,10 +26,5 @@ public class QueryDAOImpl implements QueryDAO {
        Query<CustomEntity> query = nativeQuery.setResultTransformer(Transformers.aliasToBean(CustomEntity.class));
        List<CustomEntity> list = query.list();
         return list;
-    }
-
-    @Override
-    public void setEntityManager(EntityManager entityManager) {
-        this.entityManager = entityManager;
     }
 }
