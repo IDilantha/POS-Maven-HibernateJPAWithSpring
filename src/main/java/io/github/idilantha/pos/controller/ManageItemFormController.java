@@ -162,7 +162,13 @@ public class ManageItemFormController implements Initializable {
             ItemTM selectedItem = tblItems.getSelectionModel().getSelectedItem();
             try {
                 itemBO.deleteItem(selectedItem.getCode());
-                tblItems.getItems().remove(selectedItem);
+                tblItems.getItems().clear();
+                List<ItemDTO> allItems = itemBO.findAllItems();
+                ObservableList<ItemTM> items = tblItems.getItems();
+
+                for (ItemDTO item : allItems) {
+                    items.add(new ItemTM(item.getCode(), item.getDescription(),item.getQtyOnHand(), item.getUnitPrice()));
+                }
             } catch (AlreadyExistsInOrderException e) {
                 new Alert(Alert.AlertType.INFORMATION, e.getMessage()).show();
             } catch (Exception e) {
