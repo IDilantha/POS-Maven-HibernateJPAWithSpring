@@ -22,7 +22,7 @@ public class OrderDAOImpl extends CrudDAOImpl<Order,Integer> implements OrderDAO
     public boolean existsByCustomerId(String customerId) throws Exception {
         Query nativeQuery = entityManager.createNativeQuery("SELECT * FROM `Order` WHERE customerId=? LIMIT 1");
         nativeQuery.setParameter(1,customerId);
-        return nativeQuery.getSingleResult() != null;
+        return !nativeQuery.getResultList().isEmpty();
     }
 
 }
